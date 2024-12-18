@@ -30,3 +30,6 @@ https://github.com/cdsl-research/CMDB-exporter2
 └── README.md
 ```
 
+
+- ```mysql-pvc.yaml```
+MySQLのPVCをK3s上に立てるためのYAMLファイル 
