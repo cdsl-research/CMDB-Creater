@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-server
+spec:
+  type: NodePort
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+      nodePort: 32000  # ノードポートを指定します
+      protocol: TCP
+  selector:
+    app: mysql-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-server
+spec:
+  selector:
+    matchLabels:
+      app: mysql-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-server
+    spec:
+      containers:
+        - image: mysql:5.7
+          name: mysql
+          resources: {}
+          env:
+            - name: MYSQL_USER
+              value: devuser
+            - name: MYSQL_PASSWORD
+              value: devuser
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            - name: LANG
+              value: C.UTF-8
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-server-initdb
+              mountPath: /docker-entrypoint-initdb.d
+            - name: mysql-server-conf
+              mountPath: /etc/mysql/conf.d
+            - name: vol
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-server-initdb
+          configMap:
+            name: mysql-server-initdb-config
+        - name: mysql-server-conf
+          configMap:
+            name: mysql-server-conf-config
+        - name: vol
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-server-initdb-config
+data:
+  createdb.sql: |
+    CREATE DATABASE IF NOT EXISTS cmdb;
+    USE cmdb;
+
+    CREATE TABLE IF NOT EXISTS network_status (
+        ID INT AUTO_INCREMENT PRIMARY KEY,
+        hypervisor_name VARCHAR(255),
+        hypervisor_ip VARCHAR(15),
+        ip_address VARCHAR(15),
+        connected_ip_and_port VARCHAR(255)
+    );
+    GRANT ALL ON cmdb.* TO 'devuser'@'%';
+    FLUSH PRIVILEGES;
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-server-conf-config
+data:
+  custom.cnf: |
+    [mysqld]
+    character-set-server=utf8
+    collation-server=utf8_general_ci
+
