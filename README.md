@@ -31,4 +31,18 @@ https://github.com/cdsl-research/CMDB-exporter2
 ```
 
 
-- ```mysql-pvc.yaml```：MySQLのPVCをK3s上に立てるためのYAMLファイル 
+cmdb
+- ```mysql-pvc.yaml```：MySQLのPVCをK3s上に立てるためのYAMLファイル
+- ```mysql.yaml```：MySQLのserveceやdeployment，を立てるためのYAMLファイル
+
+cmdb-creater
+- ```target_get.py```
+  - insert_to_mysql()：CMDBを構成するMySQLに対してCMDB-exporterが取得してきたデータを格納
+  - get_network_status_from_servers()：CMDB-exporterに対してデータを要求し，データを入れるように整形
+- ```cmdb-create.py```
+  - main()：target.pyの内容を実行する関数
+ 
+
+
+ 
+
