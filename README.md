@@ -108,7 +108,8 @@ $ mysql -uroot -h monitoring-master-ml -p -P 32000
 mysql> show databases;
 ```
 
-<img width="183" alt="スクリーンショット 2024-12-18 12 32 38" src="https://github.com/user-attachments/assets/517ceb73-944e-4751-977c-edc97053aaf3" />
+
+<img width="185" alt="スクリーンショット 2024-12-19 14 49 29" src="https://github.com/user-attachments/assets/35622439-5fec-4c9d-b968-ffe0542260af" />
 
 
 cmdbを選択
@@ -122,7 +123,7 @@ mysql> SELECT * FROM network_status;
 ```
 
 
-<img width="601" alt="スクリーンショット 2024-12-18 12 34 00" src="https://github.com/user-attachments/assets/e8c95491-9abc-4613-8184-e6e8216f72ed" />
+<img width="608" alt="スクリーンショット 2024-12-19 14 50 26" src="https://github.com/user-attachments/assets/b9caae88-2d13-49ee-abc6-09285601b438" />
 
 
 
