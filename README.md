@@ -94,7 +94,8 @@ $ python3 cmdb-create.py
 
 こんな感じの表示が出ればOKです．
 
-<img width="634" alt="スクリーンショット 2024-12-19 14 43 42" src="https://github.com/user-attachments/assets/73ce6d3c-3680-444d-8cd3-6c148520a170" />
+
+<img width="692" alt="スクリーンショット 2024-12-19 14 45 34" src="https://github.com/user-attachments/assets/a1babed9-cbe3-4738-9c02-a760fe18a568" />
 
 
 MySQLにデータが入っているかも確認しましょう．
