@@ -56,17 +56,26 @@ $ cd CMDB-Creater/cmdb
 NameSpaceの作成
 ```
 $ kubectl create ns cmdb
+namespace/cmdb created
+$ 
 ```
 
 
 PVCの配置
 ```
 $ kubectl apply -f mysql-pvc.yaml -n cmdb
+persistentvolumeclaim/mysql-pvc created
+$
 ```
 
 deploymentとserviceの配置
 ```
 $ kubectl apply -f mysql.yaml -n cmdb
+service/mysql-server created
+deployment.apps/mysql-server created
+configmap/mysql-server-initdb-config created
+configmap/mysql-server-conf-config created
+$
 ```
 
 podとserviceが立っているかどうかを確認します．
@@ -77,6 +86,7 @@ mysql-server-75c9cc7bd5-vhqrh   1/1     Running   0          10h
 $ kubectl get svc -n cmdb
 NAME           TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
 mysql-server   NodePort   10.43.253.57   <none>        3306:32000/TCP   10h
+$
 ```
 
 
@@ -124,6 +134,11 @@ mysql> SELECT * FROM network_status;
 
 
 <img width="608" alt="スクリーンショット 2024-12-19 14 50 26" src="https://github.com/user-attachments/assets/b9caae88-2d13-49ee-abc6-09285601b438" />
+
+
+### 最後に
+これは以下のリンクにあるAutofiltering用のソフトウェアなのでぜひそっちも使ってください．
+https://github.com/cdsl-research/AutoFiltering-v2
 
 
 
